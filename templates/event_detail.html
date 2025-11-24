@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ event.title }}</h1>
+<p>{{ event.description }}</p>
+<p>Location: {{ event.location }}</p>
+<p>When: {{ event.start_time }} — {{ event.end_time }}</p>
+<p>Capacity: {{ event.capacity or 'Unlimited' }} | Registered: {{ event.attendees|length }}</p>
+<p>
+  <a href="{{ url_for('event_edit', event_id=event.id) }}">Edit</a>
+  <form action="{{ url_for('event_delete', event_id=event.id) }}" method="post" style="display:inline">
+    <button type="submit">Delete</button>
+  </form>
+</p>
+<h2>Register</h2>
+<form method="post" action="{{ url_for('event_register', event_id=event.id) }}">
+  {{ form.hidden_tag() }}
+  {{ form.attendee_name(size=40) }}
+  {{ form.submit() }}
+</form>
+<h2>Attendees</h2>
+<ul>
+  {% for r in event.attendees %}
+    <li>{{ r.attendee_name }} ({{ r.registered_at }})</li>
+  {% else %}
+    <li>No attendees yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

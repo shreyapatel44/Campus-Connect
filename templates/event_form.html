@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ 'Edit' if event else 'Create' }} Event</h1>
+<form method="post">
+  {{ form.hidden_tag() }}
+  <p>{{ form.title.label }}<br>{{ form.title(size=60) }}</p>
+  <p>{{ form.description.label }}<br>{{ form.description(rows=5, cols=60) }}</p>
+  <p>{{ form.location.label }}<br>{{ form.location(size=60) }}</p>
+  <p>{{ form.start_time.label }}<br>{{ form.start_time(size=30) }}</p>
+  <p>{{ form.end_time.label }}<br>{{ form.end_time(size=30) }}</p>
+  <p>{{ form.capacity.label }}<br>{{ form.capacity() }}</p>
+  <p>{{ form.club_id.label }}<br>{{ form.club_id() }}</p>
+  <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

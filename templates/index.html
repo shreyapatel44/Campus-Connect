@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome to CampusConnect</h1>
+<section>
+  <h2>Clubs</h2>
+  <ul>
+    {% for club in clubs %}
+      <li><a href="{{ url_for('club_detail', club_id=club.id) }}">{{ club.name }}</a></li>
+    {% else %}
+      <li>No clubs yet.</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ url_for('club_create') }}">Create a club</a></p>
+</section>
+<section>
+  <h2>Upcoming Events</h2>
+  <ul>
+    {% for event in events %}
+      <li><a href="{{ url_for('event_detail', event_id=event.id) }}">{{ event.title }}</a> — {{ event.start_time }}</li>
+    {% else %}
+      <li>No events yet.</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ url_for('event_create') }}">Create an event</a></p>
+</section>
+{% endblock %}
